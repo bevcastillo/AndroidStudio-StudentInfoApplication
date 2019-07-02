@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">StudentInfoApplication</string>
+    <string-array name="course">
+        <item>-- SELECT COURSE --</item>
+        <item>BSIT</item>
+        <item>BSED</item>
+        <item>BSCRIM</item>
+        <item>BSME</item>
+    </string-array>
+
+</resources>
