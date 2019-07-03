@@ -16,6 +16,8 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
 public class AddStudentActivity extends AppCompatActivity implements View.OnClickListener {
 
     ImageView studentImage;
@@ -24,6 +26,8 @@ public class AddStudentActivity extends AppCompatActivity implements View.OnClic
     Spinner cboCourse;
     Uri imageUri;
     private static final int PICK_IMAGE = 100;
+    ArrayList<Student> studentArrayList = new ArrayList<Student>();
+    StudentAdapter studentAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +45,7 @@ public class AddStudentActivity extends AppCompatActivity implements View.OnClic
         studentImage.setOnClickListener(this);
         btnSave.setOnClickListener(this);
         btnCancel.setOnClickListener(this);
+
     }
 
 
@@ -93,9 +98,12 @@ public class AddStudentActivity extends AppCompatActivity implements View.OnClic
                 if(studLname.equals("") || studFname.equals("")){
                     onBackPressed();
                 }else{
+                    //add a statement to add an item here
+//                    studentArrayList.add(studentImage.getBaseline(), studLname.getText().toString(), studFname.getText().toString());
                     Toast.makeText(getApplicationContext(), "Item successfully added!", Toast.LENGTH_SHORT).show();
                     Intent home = new Intent(AddStudentActivity.this, MainActivity.class);
                     startActivity(home);
+                    studentAdapter.notifyDataSetChanged();
                 }
                 break;
             case R.id.btncancel:

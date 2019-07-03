@@ -5,13 +5,28 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ListView;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
+
+    ArrayList<Student> studentArrayList = new ArrayList<Student>();
+    StudentAdapter studentAdapter;
+    ListView listView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        listView = (ListView) findViewById(R.id.listview);
+        studentAdapter = new StudentAdapter(this, studentArrayList);
+
+        //show no data found when listview is empty
+//        listView.setEmptyView(findViewById(R.id.));
+        listView.setAdapter(studentAdapter);
     }
 
 
