@@ -10,6 +10,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -18,12 +19,13 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-public class AddStudentActivity extends AppCompatActivity implements View.OnClickListener {
+public class AddStudentActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener {
 
     ImageView studentImage;
     EditText studLname, studFname;
     Button btnSave, btnCancel;
     Spinner cboCourse;
+    String selectedCourse;
     Uri imageUri;
     private static final int PICK_IMAGE = 100;
     ArrayList<Student> studentArrayList = new ArrayList<Student>();
@@ -42,6 +44,7 @@ public class AddStudentActivity extends AppCompatActivity implements View.OnClic
         btnSave = (Button) findViewById(R.id.btnsave);
         btnCancel = (Button) findViewById(R.id.btncancel);
 
+        cboCourse.setOnItemSelectedListener(this);
         studentImage.setOnClickListener(this);
         btnSave.setOnClickListener(this);
         btnCancel.setOnClickListener(this);
@@ -95,11 +98,11 @@ public class AddStudentActivity extends AppCompatActivity implements View.OnClic
                 startActivityForResult(gallery, PICK_IMAGE);
                 break;
             case R.id.btnsave:
-                if(studLname.equals("") || studFname.equals("")){
-                    onBackPressed();
+                if(studLname.equals("") || studFname.equals("") || cboCourse.getSelectedItem().equals(0)){
+                    Toast.makeText(getApplicationContext(), "Fields can not be empty!", Toast.LENGTH_SHORT).show();
                 }else{
                     //add a statement to add an item here
-//                    studentArrayList.add(studentImage.getBaseline(), studLname.getText().toString(), studFname.getText().toString());
+//                    studentArrayList.add(studentImage.getBaseline(), studLname.getText().toString(), studFname.getText().toString(), cboCourse.getSelectedItem().toString());
                     Toast.makeText(getApplicationContext(), "Item successfully added!", Toast.LENGTH_SHORT).show();
                     Intent home = new Intent(AddStudentActivity.this, MainActivity.class);
                     startActivity(home);
@@ -123,5 +126,22 @@ public class AddStudentActivity extends AppCompatActivity implements View.OnClic
             imageUri = data.getData();
             studentImage.setImageURI(imageUri);
         }
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        //for the spinner
+        int sid = parent.getId();
+
+        switch (sid){
+            case R.id.spinner:
+                selectedCourse = this.cboCourse.getItemAtPosition(position).toString();
+                break;
+        }
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
     }
 }

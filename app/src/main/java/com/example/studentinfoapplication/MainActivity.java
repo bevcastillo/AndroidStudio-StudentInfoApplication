@@ -22,10 +22,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         listView = (ListView) findViewById(R.id.listview);
-        studentAdapter = new StudentAdapter(this, studentArrayList);
 
-        //show no data found when listview is empty
-//        listView.setEmptyView(findViewById(R.id.));
+        studentAdapter = new StudentAdapter(this, studentArrayList);
         listView.setAdapter(studentAdapter);
     }
 

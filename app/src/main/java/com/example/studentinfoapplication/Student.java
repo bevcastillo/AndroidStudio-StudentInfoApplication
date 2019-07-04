@@ -5,9 +5,7 @@ import java.io.Serializable;
 public class Student implements Serializable {
 
     private int image;
-    private String name, course;
-
-    //getters and setters
+    private String lname, fname, course;
 
     public int getImage() {
         return image;
@@ -17,12 +15,20 @@ public class Student implements Serializable {
         this.image = image;
     }
 
-    public String getName() {
-        return name;
+    public String getLname() {
+        return lname;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setLname(String lname) {
+        this.lname = lname;
+    }
+
+    public String getFname() {
+        return fname;
+    }
+
+    public void setFname(String fname) {
+        this.fname = fname;
     }
 
     public String getCourse() {

@@ -48,7 +48,8 @@ public class StudentAdapter extends BaseAdapter {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = inflater.inflate(R.layout.custom_layout, parent, false);
             holder.image = (ImageView) convertView.findViewById(R.id.imageView);
-            holder.name = (TextView) convertView.findViewById(R.id.textName);
+            holder.lname = (TextView) convertView.findViewById(R.id.textLName);
+            holder.fname = (TextView) convertView.findViewById(R.id.textFName);
             holder.course = (TextView) convertView.findViewById(R.id.textCourse);
             convertView.setTag(holder);
         }else{
@@ -56,7 +57,8 @@ public class StudentAdapter extends BaseAdapter {
         }
         //
         holder.image.setImageResource(studentArrayList.get(position).getImage());
-        holder.name.setText(studentArrayList.get(position).getName());
+        holder.lname.setText(studentArrayList.get(position).getLname());
+        holder.fname.setText(studentArrayList.get(position).getFname());
         holder.course.setText(studentArrayList.get(position).getCourse());
 
         return convertView;
@@ -64,6 +66,6 @@ public class StudentAdapter extends BaseAdapter {
 
     private static class ViewHolder{
         ImageView image;
-        TextView name, course;
+        TextView lname, fname, course;
     }
 }
