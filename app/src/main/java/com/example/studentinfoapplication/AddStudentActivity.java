@@ -14,6 +14,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -21,6 +22,7 @@ import java.util.ArrayList;
 
 public class AddStudentActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener {
 
+    ListView listView;
     ImageView studentImage;
     EditText studLname, studFname;
     Button btnSave, btnCancel;
@@ -43,11 +45,15 @@ public class AddStudentActivity extends AppCompatActivity implements View.OnClic
         cboCourse = (Spinner) findViewById(R.id.spinner);
         btnSave = (Button) findViewById(R.id.btnsave);
         btnCancel = (Button) findViewById(R.id.btncancel);
+        listView = (ListView) findViewById(R.id.listview);
 
         cboCourse.setOnItemSelectedListener(this);
         studentImage.setOnClickListener(this);
         btnSave.setOnClickListener(this);
         btnCancel.setOnClickListener(this);
+
+
+        studentAdapter = new StudentAdapter(this, studentArrayList);
 
     }
 
@@ -102,7 +108,9 @@ public class AddStudentActivity extends AppCompatActivity implements View.OnClic
                     Toast.makeText(getApplicationContext(), "Fields can not be empty!", Toast.LENGTH_SHORT).show();
                 }else{
                     //add a statement to add an item here
-//                    studentArrayList.add(studentImage.getBaseline(), studLname.getText().toString(), studFname.getText().toString(), cboCourse.getSelectedItem().toString());
+                    studentArrayList.add(studentImage.getResources().toString(), studLname.getText().toString(), studFname.getText().toString(), cboCourse.getSelectedItem());
+                    listView.setAdapter(studentAdapter);
+
                     Toast.makeText(getApplicationContext(), "Item successfully added!", Toast.LENGTH_SHORT).show();
                     Intent home = new Intent(AddStudentActivity.this, MainActivity.class);
                     startActivity(home);
@@ -112,6 +120,7 @@ public class AddStudentActivity extends AppCompatActivity implements View.OnClic
             case R.id.btncancel:
                 studLname.setText("");
                 studFname.setText("");
+                cboCourse.setSelection(0);
                 break;
         }
     }
