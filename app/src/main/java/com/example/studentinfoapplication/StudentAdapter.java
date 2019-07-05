@@ -56,10 +56,8 @@ public class StudentAdapter extends BaseAdapter {
             holder = (ViewHolder)convertView.getTag();
         }
         //
-        holder.image.setImageResource(studentArrayList.get(position).getImage());
         holder.lname.setText(studentArrayList.get(position).getLname());
         holder.fname.setText(studentArrayList.get(position).getFname());
-        holder.course.setText(studentArrayList.get(position).getCourse());
 
         return convertView;
     }

@@ -1,17 +1,19 @@
 package com.example.studentinfoapplication;
 
+import android.net.Uri;
+
 import java.io.Serializable;
 
 public class Student implements Serializable {
 
-    private int image;
-    private String lname, fname, course;
+    private Uri image;
+    String lname, fname, course;
 
-    public int getImage() {
+    public Uri getImage() {
         return image;
     }
 
-    public void setImage(int image) {
+    public void setImage(Uri image) {
         this.image = image;
     }
 

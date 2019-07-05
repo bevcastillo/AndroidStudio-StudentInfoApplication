@@ -32,6 +32,7 @@ public class AddStudentActivity extends AppCompatActivity implements View.OnClic
     private static final int PICK_IMAGE = 100;
     ArrayList<Student> studentArrayList = new ArrayList<Student>();
     StudentAdapter studentAdapter;
+    Student student;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +53,7 @@ public class AddStudentActivity extends AppCompatActivity implements View.OnClic
         btnSave.setOnClickListener(this);
         btnCancel.setOnClickListener(this);
 
+//        student = new Student(this);
 
         studentAdapter = new StudentAdapter(this, studentArrayList);
 
@@ -108,7 +110,16 @@ public class AddStudentActivity extends AppCompatActivity implements View.OnClic
                     Toast.makeText(getApplicationContext(), "Fields can not be empty!", Toast.LENGTH_SHORT).show();
                 }else{
                     //add a statement to add an item here
-                    studentArrayList.add(studentImage.getResources().toString(), studLname.getText().toString(), studFname.getText().toString(), cboCourse.getSelectedItem());
+                    String lname = studLname.getText().toString();
+                    String fname = studFname.getText().toString();
+                    String course = cboCourse.getSelectedItem().toString();
+
+                    student.setImage(imageUri);
+                    student.setLname(lname);
+                    student.setFname(fname);
+                    student.setCourse(course);
+
+                    studentArrayList.add(student);
                     listView.setAdapter(studentAdapter);
 
                     Toast.makeText(getApplicationContext(), "Item successfully added!", Toast.LENGTH_SHORT).show();
@@ -133,6 +144,7 @@ public class AddStudentActivity extends AppCompatActivity implements View.OnClic
 
         if(resultCode == RESULT_OK && requestCode == PICK_IMAGE){
             imageUri = data.getData();
+//            student.setImage(imageUri);
             studentImage.setImageURI(imageUri);
         }
     }
