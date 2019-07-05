@@ -106,10 +106,8 @@ public class AddStudentActivity extends AppCompatActivity implements View.OnClic
                 startActivityForResult(gallery, PICK_IMAGE);
                 break;
             case R.id.btnsave:
-                if(studLname.equals("") || studFname.equals("") || cboCourse.getSelectedItem().equals(0)){
-                    Toast.makeText(getApplicationContext(), "Fields can not be empty!", Toast.LENGTH_SHORT).show();
-                }else{
-                    //add a statement to add an item here
+                if(!studLname.equals("") || !studFname.equals("") || !cboCourse.getSelectedItem().equals(0)){
+
                     String lname = studLname.getText().toString();
                     String fname = studFname.getText().toString();
                     String course = cboCourse.getSelectedItem().toString();
@@ -126,6 +124,9 @@ public class AddStudentActivity extends AppCompatActivity implements View.OnClic
                     Intent home = new Intent(AddStudentActivity.this, MainActivity.class);
                     startActivity(home);
                     studentAdapter.notifyDataSetChanged();
+                }else{
+                    Toast.makeText(getApplicationContext(), "Fields can not be empty!", Toast.LENGTH_SHORT).show();
+
                 }
                 break;
             case R.id.btncancel:
