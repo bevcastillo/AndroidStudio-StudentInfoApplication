@@ -53,8 +53,7 @@ public class AddStudentActivity extends AppCompatActivity implements View.OnClic
         btnSave.setOnClickListener(this);
         btnCancel.setOnClickListener(this);
 
-//        student = new Student(this);
-
+        student = new Student(this);
         studentAdapter = new StudentAdapter(this, studentArrayList);
 
     }
@@ -112,7 +111,6 @@ public class AddStudentActivity extends AppCompatActivity implements View.OnClic
                     String fname = studFname.getText().toString();
                     String course = cboCourse.getSelectedItem().toString();
 
-                    student.setImage(imageUri);
                     student.setLname(lname);
                     student.setFname(fname);
                     student.setCourse(course);
@@ -145,7 +143,7 @@ public class AddStudentActivity extends AppCompatActivity implements View.OnClic
 
         if(resultCode == RESULT_OK && requestCode == PICK_IMAGE){
             imageUri = data.getData();
-//            student.setImage(imageUri);
+            student.setImage(imageUri);
             studentImage.setImageURI(imageUri);
         }
     }

@@ -9,6 +9,9 @@ public class Student implements Serializable {
     private Uri image;
     String lname, fname, course;
 
+    public Student() {
+    }
+
     public Uri getImage() {
         return image;
     }
