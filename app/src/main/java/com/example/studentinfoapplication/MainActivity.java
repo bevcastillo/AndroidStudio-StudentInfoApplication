@@ -3,15 +3,13 @@ package com.example.studentinfoapplication;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ListView;
 
-import java.util.ArrayList;
-
 public class MainActivity extends AppCompatActivity {
 
-    ArrayList<Student> studentArrayList = new ArrayList<Student>();
     StudentAdapter studentAdapter;
     ListView listView;
 
@@ -23,8 +21,12 @@ public class MainActivity extends AppCompatActivity {
 
         listView = (ListView) findViewById(R.id.listview);
 
-        studentAdapter = new StudentAdapter(this, studentArrayList);
-        listView.setAdapter(studentAdapter);
+        Log.d("test", "students" + Student.studentArrayList);
+
+        if (Student.studentArrayList != null) {
+            studentAdapter = new StudentAdapter(this, Student.studentArrayList);
+            listView.setAdapter(studentAdapter);
+        }
     }
 
 

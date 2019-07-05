@@ -8,6 +8,7 @@ import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -32,7 +33,7 @@ public class AddStudentActivity extends AppCompatActivity implements View.OnClic
     private static final int PICK_IMAGE = 100;
     ArrayList<Student> studentArrayList = new ArrayList<Student>();
     StudentAdapter studentAdapter;
-    Student student;
+    Student student = new Student();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +54,6 @@ public class AddStudentActivity extends AppCompatActivity implements View.OnClic
         btnSave.setOnClickListener(this);
         btnCancel.setOnClickListener(this);
 
-        student = new Student(this);
         studentAdapter = new StudentAdapter(this, studentArrayList);
 
     }
@@ -115,18 +115,22 @@ public class AddStudentActivity extends AppCompatActivity implements View.OnClic
                     student.setFname(fname);
                     student.setCourse(course);
 
-                    studentArrayList.add(student);
-                    listView.setAdapter(studentAdapter);
+                    Student.studentArrayList.add(student); //Global arraylist
 
+                    Log.d("test", "students:" + Student.studentArrayList);
+
+//                    studentArrayList.add(studentImage, studLname.getText().toString(), studFname.getText().toString(), cboCourse.getSelectedItem().toString());
+//                    listView.setAdapter(studentAdapter);
                     Toast.makeText(getApplicationContext(), "Item successfully added!", Toast.LENGTH_SHORT).show();
                     Intent home = new Intent(AddStudentActivity.this, MainActivity.class);
                     startActivity(home);
                     studentAdapter.notifyDataSetChanged();
+                    break;
                 }else{
                     Toast.makeText(getApplicationContext(), "Fields can not be empty!", Toast.LENGTH_SHORT).show();
-
+                    break;
                 }
-                break;
+
             case R.id.btncancel:
                 studLname.setText("");
                 studFname.setText("");
@@ -142,7 +146,9 @@ public class AddStudentActivity extends AppCompatActivity implements View.OnClic
         super.onActivityResult(requestCode, resultCode, data);
 
         if(resultCode == RESULT_OK && requestCode == PICK_IMAGE){
-            imageUri = data.getData();
+            if (data != null) {
+                imageUri = data.getData();
+            }
             student.setImage(imageUri);
             studentImage.setImageURI(imageUri);
         }

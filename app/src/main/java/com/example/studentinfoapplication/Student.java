@@ -3,14 +3,19 @@ package com.example.studentinfoapplication;
 import android.net.Uri;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class Student implements Serializable {
+
+    public static ArrayList<Student> studentArrayList = new ArrayList<>();
 
     private Uri image;
     String lname, fname, course;
 
-    public Student() {
+    public Student(){      //Add your constructor.
+
     }
+
 
     public Uri getImage() {
         return image;

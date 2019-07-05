@@ -58,6 +58,8 @@ public class StudentAdapter extends BaseAdapter {
         //
         holder.lname.setText(studentArrayList.get(position).getLname());
         holder.fname.setText(studentArrayList.get(position).getFname());
+        holder.image.setImageURI(studentArrayList.get(position).getImage());
+        holder.course.setText(studentArrayList.get(position).getCourse());
 
         return convertView;
     }
