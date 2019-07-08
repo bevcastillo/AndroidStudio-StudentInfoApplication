@@ -8,7 +8,6 @@ import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -99,17 +98,17 @@ public class AddStudentActivity extends AppCompatActivity implements View.OnClic
     public void onClick(View v) {
         int id = v.getId();
 
+        String lname = studLname.getText().toString();
+        String fname = studFname.getText().toString();
+        String course = cboCourse.getSelectedItem().toString();
+
         switch (id){
             case R.id.imageView2:
                 Intent gallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
                 startActivityForResult(gallery, PICK_IMAGE);
                 break;
             case R.id.btnsave:
-                if(!studLname.equals("") || !studFname.equals("") || !cboCourse.getSelectedItem().equals(0)){
-
-                    String lname = studLname.getText().toString();
-                    String fname = studFname.getText().toString();
-                    String course = cboCourse.getSelectedItem().toString();
+                if(!studentImage.equals(R.drawable.user) && !studLname.getText().toString().trim().equals("") && !studFname.getText().toString().trim().equals("") && !cboCourse.getSelectedItem().toString().trim().equals(0)){
 
                     student.setLname(lname);
                     student.setFname(fname);
@@ -117,10 +116,8 @@ public class AddStudentActivity extends AppCompatActivity implements View.OnClic
 
                     Student.studentArrayList.add(student); //Global arraylist
 
-                    Log.d("test", "students:" + Student.studentArrayList);
+//                    Log.d("test", "students:" + Student.studentArrayList);
 
-//                    studentArrayList.add(studentImage, studLname.getText().toString(), studFname.getText().toString(), cboCourse.getSelectedItem().toString());
-//                    listView.setAdapter(studentAdapter);
                     Toast.makeText(getApplicationContext(), "Item successfully added!", Toast.LENGTH_SHORT).show();
                     Intent home = new Intent(AddStudentActivity.this, MainActivity.class);
                     startActivity(home);
@@ -132,6 +129,7 @@ public class AddStudentActivity extends AppCompatActivity implements View.OnClic
                 }
 
             case R.id.btncancel:
+                studentImage.setImageResource(R.drawable.user);
                 studLname.setText("");
                 studFname.setText("");
                 cboCourse.setSelection(0);

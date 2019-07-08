@@ -3,16 +3,17 @@ package com.example.studentinfoapplication;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ListView;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
     StudentAdapter studentAdapter;
     ListView listView;
-
+    TextView emptyText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,12 +21,17 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         listView = (ListView) findViewById(R.id.listview);
+        emptyText = (TextView) findViewById(R.id.empty);
 
-        Log.d("test", "students" + Student.studentArrayList);
+        listView.setEmptyView(emptyText);
 
         if (Student.studentArrayList != null) {
+//            emptyText.setVisibility(View.GONE);
             studentAdapter = new StudentAdapter(this, Student.studentArrayList);
             listView.setAdapter(studentAdapter);
+        }else{
+            listView.setVisibility(View.INVISIBLE);
+            emptyText.setVisibility(View.VISIBLE);
         }
     }
 

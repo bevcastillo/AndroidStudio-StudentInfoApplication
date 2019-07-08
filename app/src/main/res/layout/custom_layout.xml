@@ -34,7 +34,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Lastname"
-                    android:padding="5dp"
+                    android:paddingLeft="5dp"
+                    android:textColor="#780303"
+                    android:textSize="18dp"/>
+                <TextView
+                    android:id="@+id/textComma"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text=","
                     android:textColor="#780303"
                     android:textSize="18dp"/>
 
